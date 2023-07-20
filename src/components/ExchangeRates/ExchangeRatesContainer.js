@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import ExchangeRates from './ExchangeRates';
-import { getValutes } from '../../redux/valutes-reducer';
+import { getValutes, setCurrentValute } from '../../redux/valutes-reducer';
 
 class ExchangeRatesContainer extends React.Component {
   constructor(props) {
@@ -25,7 +25,8 @@ let mapStateToProps = (state) => {
     date: state.valutesPage.date,
     previousDate: state.valutesPage.previousDate,
     isFetching: state.valutesPage.isFetching,
+    currentValute: state.valutesPage.currentValute
   } 
 }
 
-export default connect(mapStateToProps, {getValutes})(ExchangeRatesContainer);
+export default connect(mapStateToProps, {getValutes, setCurrentValute })(ExchangeRatesContainer);
