@@ -23,32 +23,21 @@ const InformWindow = (props) => {
 
   return (
     <div>
-      <br/>
-      <br/>
-      <br/>
-      <br/>
-      <br/>
-      <br/>
-      <br/>
-      <br/>
-      <br/>
-      <br/>
-      <br/>
-      <br/>
-      <br/>
-      <div>
       {props.currentValute === null 
-      ? <div class="box">Выберите валюту</div>
-      : <div class="box">
-         <h1>{props.valutes[props.currentValute].ID} - {props.valutes[props.currentValute].Name} - {props.valutes[props.currentValute].CharCode}.</h1>
-         <p>{formatDate(props.date)} - {props.valutes[props.currentValute].Value}</p>
-         <p>{formatDate(props.previousDate)} - {props.valutes[props.currentValute].Previous}</p>
+      ? <div style={{marginTop: '260px'}} className='box'>
+          <p className='subtitle is-5'>Выберите валюту</p>
+        </div>
+      : <div style={{marginTop: '260px'}} className='box'>
+         <h4 className='title is-4'>
+          {props.valutes[props.currentValute].ID} - {props.valutes[props.currentValute].Name} - {props.valutes[props.currentValute].CharCode}.
+         </h4>
+         <p className='subtitle is-5'>
+          {formatDate(props.date)} - {props.valutes[props.currentValute].Value} <br/>
+          {formatDate(props.previousDate)} - {props.valutes[props.currentValute].Previous}
+          </p>
         </div>}
-      </div>
     </div>
   )
 }
 
 export default InformWindow;
-
-//Необходимый формат даты: '17/06/2023, 13:30:00’
