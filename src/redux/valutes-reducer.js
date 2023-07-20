@@ -1,3 +1,5 @@
+import { valutesAPI } from "../api/api";
+
 const SET_VALUTES = 'SET_VALUTES';
 const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING';
 const SET_DATE = 'SET_DATE';
@@ -37,9 +39,23 @@ const valutesReducer = (state = initialState, action) => {
   }
 }
 
-export const setValutes = (valutes) => ({ type: SET_VALUTES, valutes });
-export const toggleIsFetching = (isFetching) => ({ type: TOGGLE_IS_FETCHING, isFetching });
-export const setDate = (date) => ({ type: SET_DATE, date });
-export const setPreviousDate = (date) => ({ type: SET_PREVIOUS_DATE, date });
+const setValutes = (valutes) => ({ type: SET_VALUTES, valutes });
+const toggleIsFetching = (isFetching) => ({ type: TOGGLE_IS_FETCHING, isFetching });
+const setDate = (date) => ({ type: SET_DATE, date });
+const setPreviousDate = (date) => ({ type: SET_PREVIOUS_DATE, date });
+
+// Thunk
+export const getValutes = () => {
+  return (dispatch) => {
+    dispatch(toggleIsFetching(true));
+
+    valutesAPI.getValutes().then(data => {
+      dispatch(setValutes(data.Valute));
+      dispatch(setDate(data.Date));
+      dispatch(setPreviousDate(data.PreviousDate));
+      dispatch(toggleIsFetching(false));
+    })
+  }
+}
 
 export default valutesReducer;

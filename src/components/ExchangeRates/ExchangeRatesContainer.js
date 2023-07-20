@@ -1,24 +1,17 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import ExchangeRates from './ExchangeRates';
-import { setValutes, toggleIsFetching, setDate, setPreviousDate } from '../../redux/valutes-reducer';
-import { getValutes } from '../../api/api';
-import Preloader from '../common/Preloader/Preloader';
+import { getValutes } from '../../redux/valutes-reducer';
 
 class ExchangeRatesContainer extends React.Component {
   constructor(props) {
     super(props);
   }
-  
+
   componentDidMount() {
-    this.props.toggleIsFetching(true);
-    getValutes().then( data => {
-      this.props.setValutes(data.Valute);
-      this.props.setDate(data.Date);
-      this.props.setPreviousDate(data.PreviousDate);
-      this.props.toggleIsFetching(false);
-    })
+    this.props.getValutes();
   }
+
   render() {
    return <div>
       <ExchangeRates {...this.props} />
@@ -35,4 +28,4 @@ let mapStateToProps = (state) => {
   } 
 }
 
-export default connect(mapStateToProps, {setValutes, toggleIsFetching, setDate, setPreviousDate})(ExchangeRatesContainer);
+export default connect(mapStateToProps, {getValutes})(ExchangeRatesContainer);
